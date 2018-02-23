@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.GoodsDao" >
+  <resultMap id="BaseResultMap" type="com.mall.entity.Goods" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="imagepath" property="imagepath" jdbcType="VARCHAR" />
+    <result column="imageurl" property="imageurl" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="abstracts" property="abstracts" jdbcType="LONGVARCHAR" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <association column="uid" property="uid"
+                 select="com.mall.dao.UserDao.selectByPrimaryKey"></association>
+  </resultMap>
+
+  <resultMap id="GoodsResultMap" type="com.mall.entity.GoodsView" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="imagepath" property="imagepath" jdbcType="VARCHAR" />
+    <result column="imageurl" property="imageurl" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="abstracts" property="abstracts" jdbcType="LONGVARCHAR" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, title, imagepath, imageurl, price, uid,abstracts, content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByMap" parameterType="Map" resultMap="BaseResultMap">
+    select * from user
+    <where>
+      <if test="title !=null and title !=''">
+        and title = #{title}
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insertSelective" parameterType="com.mall.entity.Goods" >
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="imagepath != null" >
+        imagepath,
+      </if>
+      <if test="imageurl != null" >
+        imageurl,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="abstracts != null" >
+        abstracts,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imagepath != null" >
+        #{imagepath,jdbcType=VARCHAR},
+      </if>
+      <if test="imageurl != null" >
+        #{imageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="uid != null" >
+        #{uid.id,jdbcType=INTEGER},
+      </if>
+      <if test="abstracts != null" >
+        #{abstracts,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.entity.Goods" >
+    update goods
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imagepath != null" >
+        imagepath = #{imagepath,jdbcType=VARCHAR},
+      </if>
+      <if test="imageurl != null" >
+        imageurl = #{imageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid.id,jdbcType=INTEGER},
+      </if>
+      <if test="abstracts != null" >
+        abstract = #{abstracts,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="find" parameterType="Map" resultMap="BaseResultMap">
+    select * from user
+    <where>
+      <if test="title !=null and title != ''">
+        and title like #{title}
+      </if>
+    </where>
+    <if test="start!=null and size!=null">
+      order by id limit ${start},${size};
+    </if>
+  </select>
+
+  <select id="findByUser" parameterType="Map" resultMap="GoodsResultMap">
+    select gt.id, title, imagepath, imageurl, price,abstracts, content,sum(number) as number from
+    <choose>
+      <when  test="type !=null and type != '' and type==1">
+        goods as gt LEFT JOIN (select * from bill where uid=#{uid}) as bt on gt.id=bt.gid
+      </when >
+      <otherwise>
+        (select * from goods where uid=#{uid}) as gt LEFT JOIN bill as bt on gt.id=bt.gid
+      </otherwise>
+    </choose>
+    group by gt.id
+    <if test="start!=null and size!=null">
+      order by id limit ${start},${size};
+    </if>
+  </select>
+
+</mapper>
