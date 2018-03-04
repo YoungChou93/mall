@@ -7,11 +7,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript"
-            src="${pageContext.request.contextPath}/bootstrap/js/jquery-2.2.1.min.js"></script>
+            src="${pageContext.request.contextPath}/static/bootstrap/js/jquery-2.2.1.min.js"></script>
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
+          href="${pageContext.request.contextPath}/static/bootstrap/css/bootstrap.min.css">
     <script type="text/javascript"
-            src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+            src="${pageContext.request.contextPath}/static/bootstrap/js/bootstrap.min.js"></script>
 
     <title>登录</title>
     <style type="text/css">

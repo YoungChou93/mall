@@ -23,7 +23,7 @@ public class GoodsDaoImpl implements GoodsDao {
     }
 
     @Override
-    public Goods selectByPrimaryKey(String id) {
+    public Goods selectByPrimaryKey(Integer id) {
         return sessionTemplate.selectOne( "com.mall.dao.GoodsDao.selectByPrimaryKey", id);
     }
 
@@ -33,7 +33,7 @@ public class GoodsDaoImpl implements GoodsDao {
     }
 
     @Override
-    public int deleteByPrimaryKey(String id) {
+    public int deleteByPrimaryKey(Integer id) {
         return sessionTemplate.delete( "com.mall.dao.GoodsDao.deleteByPrimaryKey", id);
     }
 

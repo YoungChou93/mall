@@ -1,5 +1,6 @@
 package com.mall.controller;
 
+import com.mall.entity.User;
 import com.mall.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +35,7 @@ public class UserController {
             mav.setViewName("/login");
         }else{
             session.setAttribute("user",result.get("user"));
-            mav.setViewName("/main");
+            mav.setViewName("redirect:/user/main.action");
         }
 
         return mav;
@@ -46,6 +47,14 @@ public class UserController {
         ModelAndView mav = new ModelAndView();
         userService.logout(session);
         mav.setViewName("/login");
+        return mav;
+    }
+
+    @RequestMapping("/main")
+    public ModelAndView main()
+            throws Exception {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("/main");
         return mav;
     }
 }

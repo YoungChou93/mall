@@ -7,11 +7,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript"
-            src="${pageContext.request.contextPath}/bootstrap/js/jquery-2.2.1.min.js"></script>
+            src="${pageContext.request.contextPath}/static/bootstrap/js/jquery-2.2.1.min.js"></script>
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
+          href="${pageContext.request.contextPath}/static/bootstrap/css/bootstrap.min.css">
     <script type="text/javascript"
-            src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+            src="${pageContext.request.contextPath}/static/bootstrap/js/bootstrap.min.js"></script>
 
     <title>登录</title>
     <style type="text/css">
@@ -21,24 +21,17 @@
             height:100%;
         }
 
-        .banner {
-            background-color: rgb(200, 200, 200);
-            background-size: cover;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            width:100%;
-            height:100%;
-        }
-
         .banner-top {
-            position: relative;
-            top: 50px;
-            width: 30%;
-            padding: 20px 40px;
+            position:absolute;
+            top:50%;
+            left: 50%;
+            width:350px;
+            height: 250px;
+            padding: 20px 30px;
             background: rgba(228, 232, 246, 0.56);
-            margin: 0 auto;
             min-width: 250px;
+            margin-left: -175px;
+            margin-top: -175px;
         }
 
         .error{
@@ -50,7 +43,7 @@
     <script type="text/javascript">
         $(function () {
 
-            $("#emailError").css("display", "none");
+            $("#usernameError").css("display", "none");
             $("#passwordError").css("display", "none");
             $("#verifyCodeError").css("display", "none");
             /*
@@ -59,7 +52,7 @@
             $("#loginform").submit(function () {
                 $("#msg").text("");
                 var bool = true;
-                if (!validateEmail()) {
+                if (!validateUsername()) {
                     bool = false;
                 }
 
@@ -72,8 +65,8 @@
             /*
              * 输入框得到焦点时隐藏错误信息
              */
-            $("#inputEmail").focus(function () {
-                $("#emailError").css("display", "none");
+            $("#inputUsername").focus(function () {
+                $("#usernameError").css("display", "none");
             });
 
             $("#inputPassword").focus(function () {
@@ -83,7 +76,7 @@
             /*
              *  输入框推动焦点时进行校验
              */
-            $("#inputEmail").blur(function () {
+            $("#inputUsername").blur(function () {
                 var inputName = $(this).attr("name");
                 invokeValidateFunction(inputName);
             })
@@ -108,17 +101,17 @@
         /*
          * 校验登录名
          */
-        function validateEmail() {
+        function validateUsername() {
             var bool = true;
-            $("#emailError").css("display", "none");
-            var value = $("#inputEmail").val();
+            $("#usernameError").css("display", "none");
+            var value = $("#inputUsername").val();
             if (!value) {// 非空校验
-                $("#emailError").css("display", "");
-                $("#emailError").text("用户名不能为空！");
+                $("#usernameError").css("display", "");
+                $("#usernameError").text("用户名不能为空！");
                 bool = false;
             } else if (value.length < 2 || value.length > 40) {//长度校验
-                $("#emailError").css("display", "");
-                $("#emailError").text("账号长度在2 ~ 40之间！");
+                $("#usernameError").css("display", "");
+                $("#usernameError").text("账号长度在2 ~ 40之间！");
                 bool = false;
             }
             return bool;
@@ -146,9 +139,7 @@
     </script>
 </head>
 <body>
-<div class="banner">
     <div class="container">
-        <h1 class="text-center" style="margin-top:5%;font-family: 微软雅黑"></h1>
         <div class="banner-top">
             <h2 class="text-center" style="font-family: 微软雅黑">登录</h2>
             <div class="tab-content" align="center">
@@ -158,8 +149,8 @@
                           action="${pageContext.request.contextPath}/user/login.action">
                         <div class="form-group">
                             <input type="text" name="username" class="form-control"
-                                   id="inputEmail" placeholder="Username" value="">
-                            <label id="emailError" class="error"></label>
+                                   id="inputUsername" placeholder="Username" value="">
+                            <label id="usernameError" class="error"></label>
                         </div>
                         <div class="form-group">
                             <input type="password" name="password" class="form-control"
@@ -172,7 +163,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
 </body>
 </html>

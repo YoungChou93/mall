@@ -7,11 +7,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript"
-            src="${pageContext.request.contextPath}/bootstrap/js/jquery-2.2.1.min.js"></script>
+            src="${pageContext.request.contextPath}/static/bootstrap/js/jquery-2.2.1.min.js"></script>
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
+          href="${pageContext.request.contextPath}/static/bootstrap/css/bootstrap.min.css">
     <script type="text/javascript"
-            src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+            src="${pageContext.request.contextPath}/static/bootstrap/js/bootstrap.min.js"></script>
 
     <title>添加</title>
     <style type="text/css">
@@ -20,6 +20,7 @@
             width:100%;
             height:100%;
             font-family: 微软雅黑;
+            background-color: whitesmoke;
         }
     </style>
     <script type="text/javascript">
@@ -38,7 +39,20 @@
 
 
         function addGoods() {
+            var form=document.getElementById("addform");
+            var fd =new FormData(form);
+            exectue("${pageContext.request.contextPath}/goods/add.action",fd);
 
+        }
+
+        function updateGoods() {
+            var form=document.getElementById("addform");
+            var fd =new FormData(form);
+            fd.append("id",${goods.id});
+            exectue("${pageContext.request.contextPath}/goods/update.action",fd);
+        }
+
+        function exectue(url,fd) {
             if(null==$("#title").val() || ""==$("#title").val()){
                 alert("标题不能为空！");
                 return false;
@@ -58,12 +72,8 @@
                 alert("正文不能为空！");
                 return false;
             }
-
-            var form=document.getElementById("addform");
-            var fd =new FormData(form);
-
             $.ajax({
-                url: "${pageContext.request.contextPath}/goods/add.action",
+                url: url,
                 type: 'POST',
                 cache: false,
                 data: fd,
@@ -84,14 +94,12 @@
                         $("#abstracts").val("");
                         $("#content").val("");
                     } else {
-                        var optionStr ="<p>发布失败！+data.errormsg</p>";
+                        var optionStr ="<p>发布失败！"+data.errormsg+"</p>";
                         $("#waitDialogBody").append(optionStr);
                     }
                     $('#waitDialog').modal('show');
                 }
             });
-
-
         }
 
     </script>
@@ -99,12 +107,22 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <ul class="nav nav-tabs" style="margin-bottom: 20px;">
+                <c:choose>
+                    <c:when test="${!empty goods}">
+                        <li role="presentation" class="active"><h3>内容编辑</h3></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li role="presentation" class="active"><h3>内容发布</h3></li>
+                    </c:otherwise>
+                </c:choose>
+            </ul>
         <form id="addform">
             <div class="form-group form-inline">
                 <label >标题:</label>
-                <input type="text" name="title" id="title" class="form-control"/>
+                <input type="text" name="title" id="title" class="form-control" value="${goods.title}"/>
             </div>
             <div class="form-group form-inline">
                 <input type="radio" name="image"  checked="checked" id="imageone"/>上传图片
@@ -112,21 +130,29 @@
             </div>
             <div class="form-group">
                 <input type="file" name="pic" class="form-control" id="imagepath"/>
-                <input type="text" name="imageurl" class="form-control" id="imageurl" style="display: none"/>
+                <input type="text" name="imageurl" class="form-control" id="imageurl" style="display: none" value="${goods.imageurl}"/>
             </div>
             <div class="form-group form-inline">
                 <label>价格:</label>
-                <input type="number" name="price" id="price" class="form-control"/>
+                <input type="number" name="price" id="price" class="form-control" value="${goods.price}"/>
             </div>
             <div class="form-group ">
                 <label>摘要:</label>
-                <input type="text" name="abstracts" id="abstracts" class="form-control"/>
+                <input type="text" name="abstracts" id="abstracts" class="form-control" value="${goods.abstracts}"/>
             </div>
             <div class="form-group ">
                 <label>正文:</label>
-                <textarea  class="form-control" name="content" id="content" style="height: 150px;"></textarea>
+                <textarea  class="form-control" name="content" id="content" style="height: 150px;" value="">${goods.content}</textarea>
             </div>
-            <button type="button" onclick="addGoods()" class="btn btn-primary" >发布</button>
+            <c:choose>
+                <c:when test="${!empty goods}">
+                    <button type="button" onclick="updateGoods()" class="btn btn-primary" >保存</button>
+                </c:when>
+                <c:otherwise>
+                    <button type="button" onclick="addGoods()" class="btn btn-primary" >发布</button>
+                </c:otherwise>
+            </c:choose>
+
         </form>
 </div>
     </div>

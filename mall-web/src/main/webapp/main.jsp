@@ -7,11 +7,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript"
-            src="${pageContext.request.contextPath}/bootstrap/js/jquery-2.2.1.min.js"></script>
+            src="${pageContext.request.contextPath}/static/bootstrap/js/jquery-2.2.1.min.js"></script>
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
+          href="${pageContext.request.contextPath}/static/bootstrap/css/bootstrap.min.css">
     <script type="text/javascript"
-            src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+            src="${pageContext.request.contextPath}/static/bootstrap/js/bootstrap.min.js"></script>
 
     <title>主页</title>
     <style type="text/css">
@@ -20,6 +20,8 @@
             width:100%;
             height:100%;
             font-family: 微软雅黑;
+            background-color: whitesmoke;
+            overflow-y:hidden;
         }
     </style>
     <script type="text/javascript">
@@ -47,7 +49,7 @@
                     <div class="collapse navbar-collapse">
 
                         <ul class="nav navbar-nav">
-                          <li id="homepage"><a href="${pageContext.request.contextPath}/index.action">首页</a></li>
+                          <li id="homepage"><a href="${pageContext.request.contextPath}/index.jsp" target="main">首页</a></li>
                         </ul>
 
                         <!--已登陆-->
@@ -85,7 +87,7 @@
                         <!--未登陆-->
                         <c:if test="${empty user}">
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a href="${pageContext.request.contextPath}/login.action"  style="background-color: sandybrown"><font style="font-size: 18px;">登陆</font></a></li>
+                                <li><a href="${pageContext.request.contextPath}/login.jsp"  style="background-color: red" >登陆</a></li>
                             </ul>
                         </c:if>
                     </div>
@@ -96,8 +98,8 @@
 
 </nav>
 
-<div style="width: 100%; height: 100%;margin-top:60px;">
-    <iframe frameborder="0" name="main" style="width: 100%; height: 100%;"></iframe>
+<div style="width: 100%; height: 100%;margin-top:50px;">
+    <iframe frameborder="0" name="main" style="width: 100%; height: 100%;" src="${pageContext.request.contextPath}/index.jsp"></iframe>
 </div>
 </body>
 </html>

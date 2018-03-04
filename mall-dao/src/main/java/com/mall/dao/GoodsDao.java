@@ -13,11 +13,11 @@ import java.util.Map;
  * Date : 2018/2/14
  */
 public interface GoodsDao {
-    Goods selectByPrimaryKey(String id);
+    Goods selectByPrimaryKey(Integer id);
 
     Goods selectByMap(Map<String, Object> map);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Integer  id);
 
     int deleteByMap(Map<String, Object> map);
 

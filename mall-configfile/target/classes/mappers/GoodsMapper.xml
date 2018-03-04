@@ -7,7 +7,7 @@
     <result column="imagepath" property="imagepath" jdbcType="VARCHAR" />
     <result column="imageurl" property="imageurl" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DOUBLE" />
-    <result column="abstracts" property="abstracts" jdbcType="LONGVARCHAR" />
+    <result column="abstracts" property="abstracts" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
     <association column="uid" property="uid"
                  select="com.mall.dao.UserDao.selectByPrimaryKey"></association>
@@ -19,7 +19,7 @@
     <result column="imagepath" property="imagepath" jdbcType="VARCHAR" />
     <result column="imageurl" property="imageurl" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DOUBLE" />
-    <result column="abstracts" property="abstracts" jdbcType="LONGVARCHAR" />
+    <result column="abstracts" property="abstracts" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
     <result column="number" property="number" jdbcType="INTEGER" />
   </resultMap>
@@ -96,7 +96,7 @@
         #{uid.id,jdbcType=INTEGER},
       </if>
       <if test="abstracts != null" >
-        #{abstracts,jdbcType=LONGVARCHAR},
+        #{abstracts,jdbcType=VARCHAR},
       </if>
       <if test="content != null" >
         #{content,jdbcType=LONGVARCHAR},
@@ -122,7 +122,7 @@
         uid = #{uid.id,jdbcType=INTEGER},
       </if>
       <if test="abstracts != null" >
-        abstract = #{abstracts,jdbcType=LONGVARCHAR},
+        abstracts = #{abstracts,jdbcType=VARCHAR},
       </if>
       <if test="content != null" >
         content = #{content,jdbcType=LONGVARCHAR},
@@ -132,10 +132,13 @@
   </update>
 
   <select id="find" parameterType="Map" resultMap="BaseResultMap">
-    select * from user
+    select * from goods
     <where>
       <if test="title !=null and title != ''">
         and title like #{title}
+      </if>
+      <if test="nobuy !=null and nobuy != ''">
+        and id not in (select gid from bill where uid =#{nobuy})
       </if>
     </where>
     <if test="start!=null and size!=null">
