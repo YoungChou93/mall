@@ -63,7 +63,8 @@ public class GoodsServiceImpl implements GoodsServcie {
     }
 
     @Override
-    public JSONArray list(User user) {
+    public JSONObject list(User user) {
+        JSONObject result = new JSONObject();
         JSONArray jsonArray = null;
         try {
             Map<String, Object> map = new HashMap<String, Object>();
@@ -76,6 +77,8 @@ public class GoodsServiceImpl implements GoodsServcie {
                 List<Goods> goods = goodsDao.find(map);
                 jsonArray = JSONArray.fromObject(goods);
             }
+            result.put("success", true);
+            result.put("data",jsonArray);
         } catch (DataAccessException e) {
             throw new DaoDataAccessException("数据库异常");
         } catch (ServiceRuntimeException e) {
@@ -85,17 +88,20 @@ public class GoodsServiceImpl implements GoodsServcie {
             throw new ServiceRuntimeException("未知异常");
 
         }
-        return jsonArray;
+        return result;
     }
 
     @Override
-    public JSONArray listNoBuy(User user) {
+    public JSONObject listNoBuy(User user) {
+        JSONObject result = new JSONObject();
         JSONArray jsonArray = null;
         try {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("nobuy", user.getId());
             List<Goods> goods = goodsDao.find(map);
             jsonArray = JSONArray.fromObject(goods);
+            result.put("success", true);
+            result.put("data",jsonArray);
         } catch (DataAccessException e) {
             throw new DaoDataAccessException("数据库异常");
         } catch (ServiceRuntimeException e) {
@@ -104,7 +110,7 @@ public class GoodsServiceImpl implements GoodsServcie {
             e.printStackTrace();
             throw new ServiceRuntimeException("未知异常");
         }
-        return jsonArray;
+        return result;
     }
 
     @Override
@@ -151,6 +157,7 @@ public class GoodsServiceImpl implements GoodsServcie {
             }
             goods.setUid(user);
             goodsDao.updateByPrimaryKeySelective(goods);
+            result.put("success",true);
         } catch (DataAccessException e) {
             throw new DaoDataAccessException("数据库异常" + e.toString());
         } catch (ServiceRuntimeException e) {
@@ -165,7 +172,6 @@ public class GoodsServiceImpl implements GoodsServcie {
     @Override
     public JSONObject delete(Integer id, User user) {
         JSONObject result = new JSONObject();
-        result.put("errormsg",null);
         try {
             Goods goodsold = goodsDao.selectByPrimaryKey(id);
             if (goodsold == null) {
@@ -177,6 +183,7 @@ public class GoodsServiceImpl implements GoodsServcie {
                 return result;
             }
             goodsDao.deleteByPrimaryKey(id);
+            result.put("success",true);
         } catch (DataAccessException e) {
             throw new DaoDataAccessException("数据库异常" + e.toString());
         } catch (ServiceRuntimeException e) {

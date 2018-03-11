@@ -1,7 +1,9 @@
 package com.mall.dao;
 
 import com.mall.entity.Bill;
+import com.mall.entity.BillView;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,4 +25,8 @@ public interface BillDao {
     int insertSelective(Bill record);
 
     int updateByPrimaryKeySelective(Bill record);
+
+    List<BillView> find(Map<String,Object> map);
+
+    Double getTotal(Map<String,Object> map);
 }

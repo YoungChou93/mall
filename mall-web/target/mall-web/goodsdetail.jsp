@@ -63,6 +63,8 @@
             font-weight: bold;
             color:#d22147;
         }
+
+
     </style>
     <script type="text/javascript">
         var number=1;
@@ -82,6 +84,26 @@
             });
 
         })
+
+
+        function addCart(){
+            $('#Dialog').modal('show');
+        }
+
+
+        function exectue(){
+            $('#Dialog').modal('hide');
+            $.post("${pageContext.request.contextPath}/cart/add.action",{
+                gid : ${goods.id},
+                number : $("#number").text()
+            },function (result) {
+                if (result.success) {
+                    $('#waitDialog').modal('show');
+                } else {
+                    alert(result.errormsg + result.errorinfo);
+                }
+            },'json');
+        }
     </script>
 </head>
 <body>
@@ -113,7 +135,10 @@
                     <span class="glyphicon glyphicon-plus" id="add"></span>
                 </div>
                 <c:if test="${!empty user && sessionScope.user.type==0}">
-                <a class="btn btn-danger" href="${pageContext.request.contextPath}/goods/modify.action?id=${goods.id}"><i class="glyphicon glyphicon-pencil">编辑</i></a>
+                    <a class="btn btn-danger" href="${pageContext.request.contextPath}/goods/modify.action?id=${goods.id}"><i class="glyphicon glyphicon-pencil">编辑</i></a>
+                </c:if>
+                <c:if test="${!empty user && sessionScope.user.type==1}">
+                    <button class="btn btn-danger" onclick="addCart()" style="margin-top: 10px;">加入购物车</button>
                 </c:if>
             </div>
             </div>
@@ -127,6 +152,36 @@
 
     </div>
 </div>
+<div class="modal fade " tabindex="-1" role="dialog" id="Dialog">
+    <div class="modal-dialog modal-sm" role="document" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" >系统提示</h4>
+            </div>
+            <div class="modal-body" id="DialogBody">
+                <p style='font-size: 15px;margin: 0;'>确定要加入购物车吗？</p>
+            </div>
+            <div class="modal-footer" >
+                <button type="button" class="btn btn-primary" onclick="exectue()">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
 
+<div class="modal fade " tabindex="-1" role="dialog" id="waitDialog">
+    <div class="modal-dialog modal-sm" role="document" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="mySmallModalLabel">系统提示</h4>
+            </div>
+            <div class="modal-body" id="waitDialogBody">
+                <p style='font-size: 15px;margin: 0;'>加入成功！</p>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
 </body>
 </html>

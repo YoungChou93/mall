@@ -19,4 +19,13 @@
         <property name="goodsDao" ref="goodsDao" />
     </bean>
 
+    <bean id="shoppingCartService" class="com.mall.service.impl.ShoppingCartServiceImpl">
+        <property name="shoppingCartDao" ref="shoppingCartDao" />
+    </bean>
+
+    <bean id="billService" class="com.mall.service.impl.BillServiceImpl">
+        <property name="billDao" ref="billDao" />
+        <property name="shoppingCartDao" ref="shoppingCartDao" />
+    </bean>
+
 </beans>

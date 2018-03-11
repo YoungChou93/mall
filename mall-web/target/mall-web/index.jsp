@@ -83,11 +83,11 @@
 
 function list(){
     $.post("${pageContext.request.contextPath}/goods/list.action", function (result) {
-        if (null != result.errormsg) {
-            alert(result.errormsg + result.errorinfo);
-        } else {
-            items=result;
+        if (result.success) {
+            items=result.data;
             show();
+        } else {
+            alert(result.errormsg + result.errorinfo);
         }
     }, 'json');
 }
@@ -121,12 +121,11 @@ function list(){
             $.post("${pageContext.request.contextPath}/goods/delete.action",{
                 id : items[deleteIndex].id
             },function (result) {
-                if (null != result.errormsg) {
-                    alert(result.errormsg + result.errorinfo);
-                } else {
+                if (result.success) {
                     $('#Dialog').modal('hide');
-                    items=result;
-                    show();
+                    list();
+                } else {
+                    alert(result.errormsg + result.errorinfo);
                 }
             }, 'json');
         }
@@ -161,11 +160,11 @@ function list(){
 
         function loadBuy() {
             $.post("${pageContext.request.contextPath}/goods/nobuy.action", function (result) {
-                if (null != result.errormsg) {
-                    alert(result.errormsg + result.errorinfo);
-                } else {
-                    items=result;
+                if (result.success) {
+                    items=result.data;
                     show();
+                } else {
+                    alert(result.errormsg + result.errorinfo);
                 }
             }, 'json');
             $("#nobuy").addClass('active');
@@ -176,7 +175,7 @@ function list(){
 <body>
 <div >
     <c:if test="${!empty user && sessionScope.user.type==1}">
-        <div class="row" style="margin-bottom: 10px;">
+        <div class="row" style="margin-bottom: 10px;margin-top: 10px;">
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <ul class="nav nav-tabs">

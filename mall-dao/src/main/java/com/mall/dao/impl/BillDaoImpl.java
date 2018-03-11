@@ -2,8 +2,10 @@ package com.mall.dao.impl;
 
 import com.mall.dao.BillDao;
 import com.mall.entity.Bill;
+import com.mall.entity.BillView;
 import org.mybatis.spring.SqlSessionTemplate;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -48,5 +50,15 @@ public class BillDaoImpl implements BillDao {
     @Override
     public int updateByPrimaryKeySelective(Bill record) {
         return sessionTemplate.update( "com.mall.dao.BillDao.updateByPrimaryKeySelective", record);
+    }
+
+    @Override
+    public List<BillView> find(Map<String, Object> map) {
+        return sessionTemplate.selectList( "com.mall.dao.BillDao.find", map);
+    }
+
+    @Override
+    public Double getTotal(Map<String, Object> map) {
+        return sessionTemplate.selectOne( "com.mall.dao.BillDao.getTotal", map);
     }
 }

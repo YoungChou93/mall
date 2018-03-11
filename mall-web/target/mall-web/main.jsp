@@ -72,7 +72,7 @@
                                                 <span class="glyphicon glyphicon-yen"></span>财务</a></li>
 
                                             <li class="divider"></li>
-                                            <li><a href="${pageContext.request.contextPath}/addgoods.jsp" target="main">
+                                            <li><a href="${pageContext.request.contextPath}/shoppingcart.jsp" target="main">
                                                 <span class="glyphicon glyphicon-shopping-cart"></span>购物车</a></li>
                                             <li class="divider"></li>
                                         </c:if>

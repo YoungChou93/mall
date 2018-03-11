@@ -1,5 +1,7 @@
 package com.mall.entity;
 
+import java.util.Date;
+
 public class Bill {
     private Integer id;
 
@@ -8,6 +10,10 @@ public class Bill {
     private User uid;
 
     private Integer number;
+
+    private Double price;
+
+    private Date buytime;
 
     public Integer getId() {
         return id;
@@ -39,6 +45,22 @@ public class Bill {
 
     public void setUid(User uid) {
         this.uid = uid;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Date getBuytime() {
+        return buytime;
+    }
+
+    public void setBuytime(Date buytime) {
+        this.buytime = buytime;
     }
 
     public Bill() {

@@ -4,10 +4,22 @@
   <resultMap id="BaseResultMap" type="com.mall.entity.Bill" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="buytime" property="buytime" jdbcType="TIMESTAMP" />
     <association column="uid" property="uid"
                  select="com.mall.dao.UserDao.selectByPrimaryKey"></association>
     <association column="gid" property="gid"
                  select="com.mall.dao.GoodsDao.selectByPrimaryKey"></association>
+  </resultMap>
+
+  <resultMap id="ViewResultMap" type="com.mall.entity.BillView" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="imagepath" property="imagepath" jdbcType="VARCHAR" />
+    <result column="imageurl" property="imageurl" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="buytime" property="buytime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, gid, uid, number
@@ -37,6 +49,12 @@
       <if test="number != null" >
         number,
       </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="buytime != null" >
+        buytime,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -50,6 +68,12 @@
       </if>
       <if test="number != null" >
         #{number,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="buytime != null" >
+        #{buytime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -65,7 +89,36 @@
       <if test="number != null" >
         number = #{number,jdbcType=INTEGER},
       </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="buytime != null" >
+        buytime = #{buytime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="find" parameterType="Map" resultMap="ViewResultMap">
+    select bill.id,title,imagepath,imageurl,number,bill.price,buytime from bill,goods
+    <where>
+      bill.gid=goods.id
+      <if test="uid !=null and uid != ''">
+        and bill.uid = #{uid}
+      </if>
+    </where>
+    <if test="start!=null and size!=null">
+      order by id limit ${start},${size};
+    </if>
+  </select>
+
+  <select id="getTotal" parameterType="Map" resultType="Double">
+    select SUM(price * number) from bill
+    <where>
+      <if test="uid !=null and uid != ''">
+        and uid = #{uid}
+      </if>
+    </where>
+  </select>
+
 </mapper>

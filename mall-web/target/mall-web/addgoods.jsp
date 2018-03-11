@@ -86,7 +86,7 @@
                 success: function (data) {
                     $('#waitDialog').modal('hide');
                     $("#waitDialogBody").empty();
-                    if (data.errormsg==null) {
+                    if (data.success) {
                         var optionStr ="<p>发布成功！</p>";
                         $("#waitDialogBody").append(optionStr);
                         $("#title").val("");

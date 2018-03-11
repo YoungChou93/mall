@@ -42,6 +42,7 @@ public class UserServiceImpl implements UserService {
                 }
             }
         } catch (DataAccessException e) {
+            e.printStackTrace();
             throw new DaoDataAccessException("数据库异常");
         } catch (ServiceRuntimeException e) {
             throw e;

@@ -4,6 +4,7 @@ import com.mall.dao.ShoppingCartDao;
 import com.mall.entity.ShoppingCart;
 import org.mybatis.spring.SqlSessionTemplate;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -48,5 +49,10 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     @Override
     public int updateByPrimaryKeySelective(ShoppingCart record) {
         return sessionTemplate.update( "com.mall.dao.ShoppingCartDao.updateByPrimaryKeySelective", record);
+    }
+
+    @Override
+    public List<ShoppingCart> find(Map<String, Object> map) {
+        return sessionTemplate.selectList( "com.mall.dao.ShoppingCartDao.find", map);
     }
 }

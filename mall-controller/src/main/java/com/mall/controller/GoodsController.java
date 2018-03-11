@@ -34,7 +34,7 @@ public class GoodsController {
 
     @RequestMapping("/add")
     @ResponseBody
-    public String add(HttpServletRequest request,HttpServletResponse response, Goods goods, @RequestParam MultipartFile pic){
+    public String add(HttpServletRequest request,HttpServletResponse response, Goods goods, @RequestParam MultipartFile pic)throws Exception{
         String path=request.getSession().getServletContext().getRealPath("/");
         User user =(User)request.getSession().getAttribute("user");
         JSONObject jsonObject=goodsServcie.add(goods,pic,path,user);
@@ -43,7 +43,7 @@ public class GoodsController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public String update(HttpServletRequest request,HttpServletResponse response, Goods goods, @RequestParam MultipartFile pic){
+    public String update(HttpServletRequest request,HttpServletResponse response, Goods goods, @RequestParam MultipartFile pic)throws Exception{
         String path=request.getSession().getServletContext().getRealPath("/");
         User user =(User)request.getSession().getAttribute("user");
         JSONObject jsonObject=goodsServcie.update(goods,pic,path,user);
@@ -52,7 +52,7 @@ public class GoodsController {
 
     @RequestMapping("/delete")
     @ResponseBody
-    public String delete(@RequestParam(value = "id", required = true)Integer id,HttpServletRequest request,HttpServletResponse response){
+    public String delete(@RequestParam(value = "id", required = true)Integer id,HttpServletRequest request,HttpServletResponse response)throws Exception{
         User user =(User)request.getSession().getAttribute("user");
         JSONObject jsonObject=goodsServcie.delete(id,user);
         return jsonObject.toString();
@@ -60,23 +60,21 @@ public class GoodsController {
 
     @RequestMapping(value="/list")
     @ResponseBody
-    public String list(HttpServletRequest request, HttpServletResponse response){
+    public String list(HttpServletRequest request, HttpServletResponse response)throws Exception{
         User user =(User)request.getSession().getAttribute("user");
-        JSONArray jsonArray =goodsServcie.list(user);
-        return jsonArray.toString();
+        return goodsServcie.list(user).toString();
     }
 
     @RequestMapping(value="/nobuy")
     @ResponseBody
-    public String nobuy(HttpServletRequest request, HttpServletResponse response){
+    public String nobuy(HttpServletRequest request, HttpServletResponse response)throws Exception{
         User user =(User)request.getSession().getAttribute("user");
-        JSONArray jsonArray =goodsServcie.listNoBuy(user);
-        return jsonArray.toString();
+        return goodsServcie.listNoBuy(user).toString();
     }
 
     @RequestMapping(value="/getdetail")
     @ResponseBody
-    public ModelAndView getDetail(@RequestParam(value = "id", required = true)Integer id, HttpServletRequest request, HttpServletResponse response){
+    public ModelAndView getDetail(@RequestParam(value = "id", required = true)Integer id, HttpServletRequest request, HttpServletResponse response)throws Exception{
         ModelAndView mav = new ModelAndView();
         Goods goods=goodsServcie.loadById(id);
         mav.addObject(goods);
@@ -86,7 +84,7 @@ public class GoodsController {
 
     @RequestMapping(value="/modify")
     @ResponseBody
-    public ModelAndView modify(@RequestParam(value = "id", required = true)Integer id, HttpServletRequest request){
+    public ModelAndView modify(@RequestParam(value = "id", required = true)Integer id, HttpServletRequest request)throws Exception{
         ModelAndView mav = new ModelAndView();
         User user =(User)request.getSession().getAttribute("user");
         if (user==null || user.getType()!=0){

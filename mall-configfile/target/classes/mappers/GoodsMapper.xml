@@ -35,7 +35,7 @@
   </select>
 
   <select id="selectByMap" parameterType="Map" resultMap="BaseResultMap">
-    select * from user
+    select * from goods
     <where>
       <if test="title !=null and title !=''">
         and title = #{title}
@@ -147,7 +147,7 @@
   </select>
 
   <select id="findByUser" parameterType="Map" resultMap="GoodsResultMap">
-    select gt.id, title, imagepath, imageurl, price,abstracts, content,sum(number) as number from
+    select gt.id, title, imagepath, imageurl, gt.price,abstracts, content,sum(number) as number from
     <choose>
       <when  test="type !=null and type != '' and type==1">
         goods as gt LEFT JOIN (select * from bill where uid=#{uid}) as bt on gt.id=bt.gid

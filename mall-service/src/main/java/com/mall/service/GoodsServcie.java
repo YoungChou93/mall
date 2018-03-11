@@ -23,9 +23,10 @@ public interface GoodsServcie {
 
     public JSONObject delete(Integer id,User user);
 
-    public JSONArray list(User user);
+    public JSONObject list(User user);
 
-    public JSONArray listNoBuy(User user);
-
+    //买家没有购买的商品
+    public JSONObject listNoBuy(User user);
+    //通过id查询商品
     public Goods  loadById(Integer id);
 }

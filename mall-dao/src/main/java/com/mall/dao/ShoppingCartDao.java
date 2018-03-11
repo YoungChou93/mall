@@ -2,6 +2,7 @@ package com.mall.dao;
 
 import com.mall.entity.ShoppingCart;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,4 +24,6 @@ public interface ShoppingCartDao {
     int insertSelective(ShoppingCart record);
 
     int updateByPrimaryKeySelective(ShoppingCart record);
+
+    List<ShoppingCart> find(Map<String,Object> map);
 }

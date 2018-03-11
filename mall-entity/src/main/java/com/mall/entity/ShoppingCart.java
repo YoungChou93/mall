@@ -33,6 +33,14 @@ public class ShoppingCart {
         this.number = number;
     }
 
+    public User getUid() {
+        return uid;
+    }
+
+    public void setUid(User uid) {
+        this.uid = uid;
+    }
+
     public ShoppingCart() {
     }
 

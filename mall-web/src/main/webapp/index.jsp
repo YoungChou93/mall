@@ -28,14 +28,16 @@
 
         h3{
             margin:5px;
-            font-size:20px;
+            font-size:18px;
         }
         .goods{
-            max-width: 280px;
+            width:100%;
+            max-width: 260px;
             min-width: 180px;
             height: 350px;
             background-color: white;
             margin-bottom: 20px;
+            box-shadow: 2px 2px 4px #888888;
         }
         .goods-bottom{
             margin: 10px;
@@ -83,11 +85,11 @@
 
 function list(){
     $.post("${pageContext.request.contextPath}/goods/list.action", function (result) {
-        if (null != result.errormsg) {
-            alert(result.errormsg + result.errorinfo);
-        } else {
-            items=result;
+        if (result.success) {
+            items=result.data;
             show();
+        } else {
+            alert(result.errormsg + result.errorinfo);
         }
     }, 'json');
 }
@@ -121,12 +123,11 @@ function list(){
             $.post("${pageContext.request.contextPath}/goods/delete.action",{
                 id : items[deleteIndex].id
             },function (result) {
-                if (null != result.errormsg) {
-                    alert(result.errormsg + result.errorinfo);
-                } else {
+                if (result.success) {
                     $('#Dialog').modal('hide');
-                    items=result;
-                    show();
+                    list();
+                } else {
+                    alert(result.errormsg + result.errorinfo);
                 }
             }, 'json');
         }
@@ -161,11 +162,11 @@ function list(){
 
         function loadBuy() {
             $.post("${pageContext.request.contextPath}/goods/nobuy.action", function (result) {
-                if (null != result.errormsg) {
-                    alert(result.errormsg + result.errorinfo);
-                } else {
-                    items=result;
+                if (result.success) {
+                    items=result.data;
                     show();
+                } else {
+                    alert(result.errormsg + result.errorinfo);
                 }
             }, 'json');
             $("#nobuy").addClass('active');
@@ -176,7 +177,7 @@ function list(){
 <body>
 <div >
     <c:if test="${!empty user && sessionScope.user.type==1}">
-        <div class="row" style="margin-bottom: 10px;">
+        <div class="row" style="margin-bottom: 10px;margin-top: 10px;">
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <ul class="nav nav-tabs">
@@ -189,10 +190,10 @@ function list(){
     <div class="container-fluid" style="margin-top:20px;margin-bottom: 100px;">
         <div class="row">
             <div class="col-md-2"></div>
-            <div class="col-md-2" id="content1"></div>
+            <div class="col-md-2" id="content1" ></div>
             <div class="col-md-2" id="content2"></div>
-            <div class="col-md-2" id="content3"></div>
-            <div class="col-md-2" id="content4"></div>
+            <div class="col-md-2" id="content3" ></div>
+            <div class="col-md-2" id="content4" ></div>
             <div class="col-md-2"></div>
         </div>
     </div>

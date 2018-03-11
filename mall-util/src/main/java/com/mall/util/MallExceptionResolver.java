@@ -22,7 +22,7 @@ public class MallExceptionResolver  extends SimpleMappingExceptionResolver {
             if (ex instanceof DataAccessException) {
                 try {
                     JSONObject result = new JSONObject();
-                    result.put("data", null);
+                    result.put("success", false);
                     result.put("errormsg", "数据库异常");
                     String msg = ex.getMessage();
                     if (null == msg || "".equals(msg)) {
@@ -36,7 +36,7 @@ public class MallExceptionResolver  extends SimpleMappingExceptionResolver {
             } else if (ex instanceof ServiceRuntimeException) {
                 try {
                     JSONObject result = new JSONObject();
-                    result.put("data", null);
+                    result.put("success", false);
                     result.put("errormsg", "服务层异常");
                     String msg = ex.getMessage();
                     if (null == msg || "".equals(msg)) {
@@ -50,7 +50,7 @@ public class MallExceptionResolver  extends SimpleMappingExceptionResolver {
             } else {
                 try {
                     JSONObject result = new JSONObject();
-                    result.put("data", null);
+                    result.put("success", false);
                     result.put("errormsg", "系统异常");
                     String msg = ex.getMessage();
                     if (null == msg || "".equals(msg)) {
