@@ -107,6 +107,16 @@
                 return false;
             }
 
+            if($("#price").val()>100000 || $("#price").val()<0){
+                alert("价格在0~100000之间");
+                return false;
+            }
+
+            if($("#imageurl").val().length>200){
+                alert("图片链接超过长度！");
+                return false;
+            }
+
 
             $.ajax({
                 url: url,

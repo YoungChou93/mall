@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-03-18 17:32:16
+Date: 2018-03-18 21:10:15
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,7 +31,7 @@ CREATE TABLE `bill` (
   KEY `fk_bill_goods` (`gid`),
   CONSTRAINT `fk_bill_goods` FOREIGN KEY (`gid`) REFERENCES `goods` (`id`),
   CONSTRAINT `fk_bill_user` FOREIGN KEY (`uid`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bill
@@ -44,6 +44,10 @@ INSERT INTO `bill` VALUES ('5', '5', '1', '6', '222.00', '2018-03-11 14:52:45');
 INSERT INTO `bill` VALUES ('6', '24', '1', '18', '16.16', '2018-03-18 16:33:08');
 INSERT INTO `bill` VALUES ('7', '6', '1', '4', '222.00', '2018-03-18 16:57:33');
 INSERT INTO `bill` VALUES ('8', '6', '1', '1', '111.00', '2018-03-18 17:30:15');
+INSERT INTO `bill` VALUES ('9', '15', '1', '1', '199.00', '2018-03-18 21:00:21');
+INSERT INTO `bill` VALUES ('10', '6', '1', '1', '111.00', '2018-03-18 21:00:21');
+INSERT INTO `bill` VALUES ('11', '5', '1', '1', '222.00', '2018-03-18 21:00:21');
+INSERT INTO `bill` VALUES ('12', '2', '1', '1', '22.00', '2018-03-18 21:00:21');
 
 -- ----------------------------
 -- Table structure for goods
@@ -53,7 +57,7 @@ CREATE TABLE `goods` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品id',
   `title` varchar(80) NOT NULL COMMENT '标题',
   `imagepath` varchar(200) DEFAULT NULL COMMENT '图片路径',
-  `imageurl` varchar(200) DEFAULT NULL COMMENT '图片url',
+  `imageurl` varchar(250) DEFAULT NULL COMMENT '图片url',
   `abstracts` varchar(140) NOT NULL COMMENT '摘要',
   `content` text NOT NULL COMMENT '正文',
   `price` double(12,2) NOT NULL COMMENT '价格',
@@ -89,7 +93,7 @@ CREATE TABLE `shoppingcart` (
   KEY `fk_shoppingcart_goods` (`gid`),
   CONSTRAINT `fk_shoppingcart_goods` FOREIGN KEY (`gid`) REFERENCES `goods` (`id`),
   CONSTRAINT `fk_shoppingcart_user` FOREIGN KEY (`uid`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of shoppingcart
