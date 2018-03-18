@@ -28,4 +28,22 @@
         <property name="shoppingCartDao" ref="shoppingCartDao" />
     </bean>
 
+    <tx:advice id="serviceTxAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- readonly -->
+            <tx:method name="login" read-only="true" />
+            <tx:method name="load*" read-only="true" />
+
+            <!-- 一般操作-->
+            <tx:method name="add" isolation="READ_COMMITTED"  />
+            <tx:method name="update" isolation="READ_COMMITTED"  />
+            <tx:method name="delete" isolation="READ_COMMITTED"  />
+
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="serviceAopMallcut" expression="execution(* com.mall.service.*.*(..))"/>
+        <aop:advisor advice-ref="serviceTxAdvice" pointcut-ref="serviceAopMallcut"/>
+    </aop:config>
 </beans>

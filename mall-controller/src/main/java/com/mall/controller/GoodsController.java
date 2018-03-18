@@ -3,6 +3,7 @@ package com.mall.controller;
 import com.mall.entity.Goods;
 import com.mall.entity.GoodsView;
 import com.mall.entity.User;
+import com.mall.service.BillService;
 import com.mall.service.GoodsServcie;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -31,6 +32,9 @@ public class GoodsController {
 
     @Resource
     private GoodsServcie goodsServcie;
+
+    @Resource
+    private BillService billService;
 
     @RequestMapping("/add")
     @ResponseBody
@@ -62,22 +66,27 @@ public class GoodsController {
     @ResponseBody
     public String list(HttpServletRequest request, HttpServletResponse response)throws Exception{
         User user =(User)request.getSession().getAttribute("user");
-        return goodsServcie.list(user).toString();
+        return goodsServcie.load(user).toString();
     }
 
     @RequestMapping(value="/nobuy")
     @ResponseBody
     public String nobuy(HttpServletRequest request, HttpServletResponse response)throws Exception{
         User user =(User)request.getSession().getAttribute("user");
-        return goodsServcie.listNoBuy(user).toString();
+        return goodsServcie.loadNoBuy(user).toString();
     }
 
     @RequestMapping(value="/getdetail")
     @ResponseBody
     public ModelAndView getDetail(@RequestParam(value = "id", required = true)Integer id, HttpServletRequest request, HttpServletResponse response)throws Exception{
         ModelAndView mav = new ModelAndView();
+        User user =(User)request.getSession().getAttribute("user");
         Goods goods=goodsServcie.loadById(id);
         mav.addObject(goods);
+        if(user!=null && user.getType()==1){
+            Double price=billService.getNewestBuyPrice(goods.getId(),user);
+            mav.addObject("price",price);
+        }
         mav.setViewName("/goodsdetail");
         return mav;
     }

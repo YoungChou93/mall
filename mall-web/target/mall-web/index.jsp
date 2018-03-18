@@ -28,14 +28,16 @@
 
         h3{
             margin:5px;
-            font-size:20px;
+            font-size:18px;
         }
         .goods{
-            max-width: 280px;
+            width:100%;
+            max-width: 260px;
             min-width: 180px;
             height: 350px;
             background-color: white;
             margin-bottom: 20px;
+            box-shadow: 2px 2px 4px #888888;
         }
         .goods-bottom{
             margin: 10px;
@@ -139,10 +141,10 @@ function list(){
         }
 
         function formatHad(e,index) {
-            var show="已购买";
+            var show="已购买 "+ e.number +"件";
             var deleteit="";
             <c:if test="${!empty user && sessionScope.user.type==0}">
-            show="已售出";
+            show="已售出 "+ e.number +"件";
             deleteit="<button class='btn btn-default' style='float: right;' onclick='deleteItem("+index+")'>删除</button>"
             </c:if>
             if(e.number!=null && e.number!=0) {
@@ -188,10 +190,10 @@ function list(){
     <div class="container-fluid" style="margin-top:20px;margin-bottom: 100px;">
         <div class="row">
             <div class="col-md-2"></div>
-            <div class="col-md-2" id="content1"></div>
+            <div class="col-md-2" id="content1" ></div>
             <div class="col-md-2" id="content2"></div>
-            <div class="col-md-2" id="content3"></div>
-            <div class="col-md-2" id="content4"></div>
+            <div class="col-md-2" id="content3" ></div>
+            <div class="col-md-2" id="content4" ></div>
             <div class="col-md-2"></div>
         </div>
     </div>

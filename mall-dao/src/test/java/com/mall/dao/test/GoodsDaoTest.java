@@ -38,9 +38,7 @@ public class GoodsDaoTest {
         goods.setPrice(111.11);
         goodsDao.insertSelective(goods);*/
 
-        Map<String,Object> map =new HashMap<String,Object>();
-        map.put("type",0);
-        map.put("uid",2);
-        System.out.println(goodsDao.findByUser(map));
+
+        System.out.println(goodsDao.getTotal());
     }
 }

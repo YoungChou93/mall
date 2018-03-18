@@ -22,6 +22,10 @@
             font-family: 微软雅黑;
             background-color: whitesmoke;
         }
+
+        .td1{
+            vertical-align: middle;
+        }
     </style>
     <script type="text/javascript">
         var items = null;
@@ -48,14 +52,14 @@
                 number = index + 1;
                 var divstring = "<tr>" +
                     "<th scope='row'>" + number + "</th>" +
-                    "<td><img style='width:80px;height: 80px;' src='" + formatImage(e)  + "'/></td>" +
+                    "<td><img style='width:60px;height: 60px;' src='" + formatImage(e)  + "'/></td>" +
                     "<td>" + e.title + "</td>" +
                     "<td>" + e.buytime + "</td>" +
                     "<td>" + e.number + "</td>" +
-                    "<td>" + e.price + "</td></tr>"
+                    "<td>¥ " + e.price + "</td></tr>"
                 $("#tablebody").append(divstring);
             });
-            $("#tablebody").append("<tr><td>"+items.total+"</td></tr>")
+            $("#tablebody").append("<tr><td></td><td></td><td></td><td></td><td></td><td>总计:¥"+items.total+"</td></tr>")
         }
 
         function formatImage(e) {
@@ -85,6 +89,7 @@
                             <th>图片</th>
                             <th>名称</th>
                             <th>时间</th>
+                            <th>数量</th>
                             <th>价格</th>
                         </tr>
                         </thead>

@@ -112,6 +112,19 @@
     </if>
   </select>
 
+  <select id="getNewestBuy" parameterType="Map" resultType="Double">
+    select price from bill
+    <where>
+      <if test="gid !=null and gid != ''">
+        and bill.gid = #{gid}
+      </if>
+      <if test="uid !=null and uid != ''">
+        and bill.uid = #{uid}
+      </if>
+    </where>
+      order by id DESC limit 1;
+  </select>
+
   <select id="getTotal" parameterType="Map" resultType="Double">
     select SUM(price * number) from bill
     <where>

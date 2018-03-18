@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public interface UserService {
 
-    public Map<String,Object> login(String username, String password);
+     Map<String,Object> login(String username, String password);
 
-    public void logout(HttpSession session);
+     void logout(HttpSession session);
 }

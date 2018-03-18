@@ -40,6 +40,9 @@
       <if test="title !=null and title !=''">
         and title = #{title}
       </if>
+      <if test="newest !=null and newest !=''">
+        and uid = #{newest} ORDER BY id DESC LIMIT  1
+      </if>
     </where>
   </select>
 
@@ -160,6 +163,10 @@
     <if test="start!=null and size!=null">
       order by id limit ${start},${size};
     </if>
+  </select>
+
+  <select id="getTotal"  resultType="Integer">
+    select count(*) from goods
   </select>
 
 </mapper>

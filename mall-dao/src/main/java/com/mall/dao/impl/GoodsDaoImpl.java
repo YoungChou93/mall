@@ -62,4 +62,9 @@ public class GoodsDaoImpl implements GoodsDao {
     public List<GoodsView> findByUser(Map<String, Object> map) {
         return sessionTemplate.selectList( "com.mall.dao.GoodsDao.findByUser", map);
     }
+
+    @Override
+    public int getTotal() {
+        return sessionTemplate.selectOne( "com.mall.dao.GoodsDao.getTotal");
+    }
 }

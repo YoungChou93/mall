@@ -99,6 +99,11 @@
             var sids=sidarray.join(",");
             var numbers=numberarray.join(",");
 
+            if(sids==null || sids==""){
+                alert("当前商品为空");
+                return false;
+            }
+
             $.post("${pageContext.request.contextPath}/bill/add.action",{
                 sids :sids,
                 numbers : numbers

@@ -68,7 +68,7 @@
                                         </c:if>
                                         <!--买家-->
                                         <c:if test="${sessionScope.user.type==1}">
-                                            <li><a href="${pageContext.request.contextPath}/addgoods.jsp" target="main">
+                                            <li><a href="${pageContext.request.contextPath}/bill.jsp" target="main">
                                                 <span class="glyphicon glyphicon-yen"></span>财务</a></li>
 
                                             <li class="divider"></li>
@@ -77,7 +77,7 @@
                                             <li class="divider"></li>
                                         </c:if>
                                         <li><a
-                                                href="${pageContext.request.contextPath}/user/logout.action"><span
+                                                href="${pageContext.request.contextPath}/logout.action"><span
                                                 class="glyphicon glyphicon-off"></span>退出</a></li>
                                     </ul></li>
 
@@ -101,5 +101,8 @@
 <div style="width: 100%; height: 100%;margin-top:50px;">
     <iframe frameborder="0" name="main" style="width: 100%; height: 100%;" src="${pageContext.request.contextPath}/index.jsp"></iframe>
 </div>
+<nav class="navbar-fixed-bottom" role="navigation" style="background-color: lightgray;height: 36px;text-align: center;padding: 8px;">
+    <p style="font-size: 12px;font-family: 微软雅黑;color: grey;">Copyright By ZhouYang 2018</p>
+</nav>
 </body>
 </html>

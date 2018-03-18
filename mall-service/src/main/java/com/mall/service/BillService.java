@@ -10,5 +10,7 @@ public interface BillService {
 
     JSONObject add(String sids,String numbers,User user);
 
-    JSONObject list(User user);
+    JSONObject load(User user);
+
+    Double getNewestBuyPrice(Integer gid,User user);
 }

@@ -141,10 +141,10 @@ function list(){
         }
 
         function formatHad(e,index) {
-            var show="已购买";
+            var show="已购买 "+ e.number +"件";
             var deleteit="";
             <c:if test="${!empty user && sessionScope.user.type==0}">
-            show="已售出";
+            show="已售出 "+ e.number +"件";
             deleteit="<button class='btn btn-default' style='float: right;' onclick='deleteItem("+index+")'>删除</button>"
             </c:if>
             if(e.number!=null && e.number!=0) {

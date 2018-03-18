@@ -101,4 +101,19 @@ public class Goods {
                 ", uid=" + uid +
                 '}';
     }
+
+    public boolean verify(){
+        if(this.title==null || this.title.length()<2 || this.title.length()>80){
+            return false;
+        }
+
+        if(this.abstracts==null || this.abstracts.length()<2 || this.abstracts.length()>140){
+            return false;
+        }
+
+        if(this.content==null || this.content.length()<2 || this.content.length()>1000){
+            return false;
+        }
+        return true;
+    }
 }

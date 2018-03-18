@@ -29,4 +29,6 @@ public interface BillDao {
     List<BillView> find(Map<String,Object> map);
 
     Double getTotal(Map<String,Object> map);
+
+    Double getNewestBuy(Map<String,Object> map);
 }

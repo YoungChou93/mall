@@ -10,6 +10,6 @@ public interface ShoppingCartService {
 
     JSONObject add (Integer gid,User user,Integer number);
 
-    JSONObject list (User user);
+    JSONObject load (User user);
 
 }

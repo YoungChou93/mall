@@ -33,6 +33,6 @@ public class ShoppingCartController {
     @ResponseBody
     public String list(HttpServletRequest request, HttpServletResponse response)throws Exception{
         User user =(User)request.getSession().getAttribute("user");
-        return shoppingCartService.list(user).toString();
+        return shoppingCartService.load(user).toString();
     }
 }

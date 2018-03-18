@@ -17,16 +17,16 @@ import java.util.List;
  */
 public interface GoodsServcie {
 
-    public JSONObject add(Goods goods, MultipartFile pic,String path,User user);
+     JSONObject add(Goods goods, MultipartFile pic,String path,User user);
 
-    public JSONObject update(Goods goods, MultipartFile pic,String path,User user);
+     JSONObject update(Goods goods, MultipartFile pic,String path,User user);
 
-    public JSONObject delete(Integer id,User user);
+     JSONObject delete(Integer id,User user);
 
-    public JSONObject list(User user);
+     JSONObject load(User user);
 
     //买家没有购买的商品
-    public JSONObject listNoBuy(User user);
+     JSONObject loadNoBuy(User user);
     //通过id查询商品
-    public Goods  loadById(Integer id);
+     Goods  loadById(Integer id);
 }

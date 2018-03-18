@@ -22,9 +22,19 @@
             font-family: 微软雅黑;
             background-color: whitesmoke;
         }
+
+        .img{
+            width:200px;
+            height:200px;
+            float: right;
+            border: double;
+            position: absolute;
+            top:80px;
+            right:20px;
+        }
     </style>
     <script type="text/javascript">
-
+        var gid=null;
         $(function () {
             $("#imageone").click(function () {
                 $("#imagepath").show();
@@ -35,6 +45,10 @@
                 $("#imageurl").show();
 
             });
+
+            $("#imageurl").blur(function () {
+                $("#aimage").attr('src',$("#imageurl").val());
+            })
         });
 
 
@@ -72,6 +86,28 @@
                 alert("正文不能为空！");
                 return false;
             }
+
+            if(($("#imageurl").val()==null || $("#imageurl").val()=="" )&& ($("#imagepath").val()==null || $("#imagepath").val()=="")){
+                alert("图片不能为空！");
+                return false;
+            }
+
+            if($("#title").val().length<2 || $("#title").val().length>80){
+                alert("标题长度在2~80之间！");
+                return false;
+            }
+
+            if($("#abstracts").val().length<2 || $("#abstracts").val().length>140){
+                alert("摘要长度在2~140之间！");
+                return false;
+            }
+
+            if($("#content").val().length<2 || $("#content").val().length>1000){
+                alert("正文长度在2~1000之间！");
+                return false;
+            }
+
+
             $.ajax({
                 url: url,
                 type: 'POST',
@@ -87,19 +123,32 @@
                     $('#waitDialog').modal('hide');
                     $("#waitDialogBody").empty();
                     if (data.success) {
-                        var optionStr ="<p>发布成功！</p>";
+                        gid=data.id;
+                        var optionStr ="<p>操作成功！</p>";
                         $("#waitDialogBody").append(optionStr);
                         $("#title").val("");
                         $("#price").val("");
                         $("#abstracts").val("");
                         $("#content").val("");
                     } else {
-                        var optionStr ="<p>发布失败！"+data.errormsg+"</p>";
+                        var optionStr ="<p>失败！"+data.errormsg+"</p>";
                         $("#waitDialogBody").append(optionStr);
                     }
                     $('#waitDialog').modal('show');
                 }
             });
+        }
+
+
+        function lookDetail(){
+            if(gid==null){
+                return false;
+            }
+            window.location.href = "${pageContext.request.contextPath}/goods/getdetail.action?id="+gid;
+        }
+
+        function backIndex(){
+            window.location.href = "${pageContext.request.contextPath}/index.jsp";
         }
 
     </script>
@@ -125,17 +174,18 @@
                 <input type="text" name="title" id="title" class="form-control" value="${goods.title}"/>
             </div>
             <div class="form-group form-inline">
+                <label>价格:</label>
+                <input type="number" name="price" id="price" class="form-control" value="${goods.price}"/>
+            </div>
+            <div class="form-group form-inline">
                 <input type="radio" name="image"  checked="checked" id="imageone"/>上传图片
                 <input type="radio" name="image" id="imagetwo"/>图片url
             </div>
             <div class="form-group">
-                <input type="file" name="pic" class="form-control" id="imagepath"/>
-                <input type="text" name="imageurl" class="form-control" id="imageurl" style="display: none" value="${goods.imageurl}"/>
+                <input type="file" name="pic" class="form-control" id="imagepath" style="width: 60%;"/>
+                <input type="text" name="imageurl" class="form-control" id="imageurl" style="width: 60%;display: none;" value="${goods.imageurl}"/>
             </div>
-            <div class="form-group form-inline">
-                <label>价格:</label>
-                <input type="number" name="price" id="price" class="form-control" value="${goods.price}"/>
-            </div>
+
             <div class="form-group ">
                 <label>摘要:</label>
                 <input type="text" name="abstracts" id="abstracts" class="form-control" value="${goods.abstracts}"/>
@@ -147,13 +197,23 @@
             <c:choose>
                 <c:when test="${!empty goods}">
                     <button type="button" onclick="updateGoods()" class="btn btn-primary" >保存</button>
+                    <c:choose>
+                        <c:when test="${!empty goods.imageurl}">
+                            <img class="img" id="aimage" src="${goods.imageurl}" alt=""/>
+                        </c:when>
+                        <c:otherwise>
+                            <img class="img" id="aimage" src="${pageContext.request.contextPath}/${goods.imagepath}" alt=""/>
+                        </c:otherwise>
+                    </c:choose>
                 </c:when>
                 <c:otherwise>
                     <button type="button" onclick="addGoods()" class="btn btn-primary" >发布</button>
+                    <img class="img" id="aimage" src="" alt=""/>
                 </c:otherwise>
             </c:choose>
 
         </form>
+
 </div>
     </div>
 </div>
@@ -166,6 +226,10 @@
                 <h4 class="modal-title" id="mySmallModalLabel">系统提示</h4>
             </div>
             <div class="modal-body" id="waitDialogBody">
+            </div>
+            <div class="modal-footer" >
+                <button type="button" class="btn btn-primary" onclick="lookDetail()">查看内容</button>
+                <button type="button" class="btn btn-primary" onclick="backIndex()">返回首页</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

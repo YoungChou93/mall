@@ -61,4 +61,9 @@ public class BillDaoImpl implements BillDao {
     public Double getTotal(Map<String, Object> map) {
         return sessionTemplate.selectOne( "com.mall.dao.BillDao.getTotal", map);
     }
+
+    @Override
+    public Double getNewestBuy(Map<String, Object> map) {
+        return sessionTemplate.selectOne( "com.mall.dao.BillDao.getNewestBuy", map);
+    }
 }

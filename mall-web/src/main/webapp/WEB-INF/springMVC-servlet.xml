@@ -33,19 +33,11 @@
 
 	<!-- 全局的异常处理器 -->
 	<bean class="com.mall.util.MallExceptionResolver" />
-
-	<!-- 拦截器 -->
-	<!--<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean class="com.association.util.interceptor.LoginUserInterceptor"></bean>
-		</mvc:interceptor>
-	</mvc:interceptors>-->
 	
 	<!-- 文件上传 -->
     <bean id="multipartResolver"
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
          <!-- setting maximum upload size -->
-        <property name="maxUploadSize" value="100000000" />
+        <property name="maxUploadSize" value="10240000" />
     </bean>
 </beans>  

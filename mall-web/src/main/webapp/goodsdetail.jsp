@@ -64,6 +64,11 @@
             color:#d22147;
         }
 
+        h4{
+            font-family: 微软雅黑;
+            font-size: 14px;
+            color: gray;
+        }
 
     </style>
     <script type="text/javascript">
@@ -139,6 +144,9 @@
                 </c:if>
                 <c:if test="${!empty user && sessionScope.user.type==1}">
                     <button class="btn btn-danger" onclick="addCart()" style="margin-top: 10px;">加入购物车</button>
+                    <c:if test="${!empty price}">
+                    <h4>上次购买价格 ${price}</h4>
+                    </c:if>
                 </c:if>
             </div>
             </div>

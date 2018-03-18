@@ -33,6 +33,6 @@ public class BillController {
     @ResponseBody
     public String list(HttpServletRequest request, HttpServletResponse response)throws Exception{
         User user =(User)request.getSession().getAttribute("user");
-        return billService.list(user).toString();
+        return billService.load(user).toString();
     }
 }

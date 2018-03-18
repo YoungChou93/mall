@@ -28,4 +28,6 @@ public interface GoodsDao {
     List<Goods> find(Map<String, Object> map);
 
     List<GoodsView> findByUser(Map<String, Object> map);
+
+    int getTotal ();
 }

@@ -12,6 +12,8 @@
           href="${pageContext.request.contextPath}/static/bootstrap/css/bootstrap.min.css">
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/static/jquery.md5.js"></script>
 
     <title>登录</title>
     <style type="text/css">
@@ -19,6 +21,7 @@
             font-size: 100%;
             width:100%;
             height:100%;
+            background-color: whitesmoke;
         }
 
         .banner-top {
@@ -46,21 +49,6 @@
             $("#usernameError").css("display", "none");
             $("#passwordError").css("display", "none");
             $("#verifyCodeError").css("display", "none");
-            /*
-             * 2. 给注册按钮添加submit()事件，完成表单校验
-             */
-            $("#loginform").submit(function () {
-                $("#msg").text("");
-                var bool = true;
-                if (!validateUsername()) {
-                    bool = false;
-                }
-
-                if (!validatePassword()) {
-                    bool = false;
-                }
-                return bool;
-            });
 
             /*
              * 输入框得到焦点时隐藏错误信息
@@ -117,9 +105,6 @@
             return bool;
         }
 
-        /*
-         * 校验密码
-         */
         function validatePassword() {
             var bool = true;
             $("#passwordError").css("display", "none");
@@ -136,28 +121,42 @@
             return bool;
         }
 
+        function loginmall() {
+            $("#msg").text("");
+            if (!validateUsername()) {
+               return  false;
+            }
+            if (!validatePassword()) {
+                return  false;
+            }
+
+            $("#inputPassword").val($.md5($("#inputPassword").val()));
+
+           $("#loginform").submit();
+        }
+
     </script>
 </head>
 <body>
     <div class="container">
         <div class="banner-top">
             <h2 class="text-center" style="font-family: 微软雅黑">登录</h2>
+            <font color="red" id="msg" style="font-size: 10px;float: right;">${errorMsg}</font>
             <div class="tab-content" align="center">
                 <div class="tab-pane fade in active" id="login">
-                    <font color="red" id="msg">${errorMsg}</font>
                     <form class="form-horizontal" id="loginform" method="post" style="margin: 20px;"
-                          action="${pageContext.request.contextPath}/user/login.action">
+                          action="${pageContext.request.contextPath}/login.action">
                         <div class="form-group">
                             <input type="text" name="username" class="form-control"
                                    id="inputUsername" placeholder="Username" value="">
-                            <label id="usernameError" class="error"></label>
+                            <label id="usernameError" class="error" style="font-size: 10px;"></label>
                         </div>
                         <div class="form-group">
                             <input type="password" name="password" class="form-control"
                                    id="inputPassword" placeholder="Password">
-                            <label id="passwordError" class="error"></label>
+                            <label id="passwordError" class="error" style="font-size: 10px;"></label>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">登录</button>
+                        <button type="button" class="btn btn-primary btn-block" onclick="loginmall()">登录</button>
                     </form>
                 </div>
             </div>
