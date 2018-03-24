@@ -98,11 +98,11 @@
 
 </nav>
 
-<div style="width: 100%; height: 100%;margin-top:50px;">
+<div style="width: 100%; height: 100%;margin-top:50px;margin-bottom: 36px;">
     <iframe frameborder="0" name="main" style="width: 100%; height: 100%;" src="${pageContext.request.contextPath}/index.jsp"></iframe>
 </div>
 <nav class="navbar-fixed-bottom" role="navigation" style="background-color: lightgray;height: 36px;text-align: center;padding: 8px;">
-    <p style="font-size: 12px;font-family: 微软雅黑;color: grey;">Copyright By ZhouYang 2018</p>
+    <p style="font-size: 12px;font-family: 微软雅黑;color: grey;">Copyright © 2018. Zhou Yang All rights reserved.</p>
 </nav>
 </body>
 </html>

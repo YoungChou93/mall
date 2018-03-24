@@ -62,7 +62,9 @@
         function updateGoods() {
             var form=document.getElementById("addform");
             var fd =new FormData(form);
+            <c:if test="${!empty goods}">
             fd.append("id",${goods.id});
+            </c:if>
             exectue("${pageContext.request.contextPath}/goods/update.action",fd);
         }
 
@@ -87,10 +89,12 @@
                 return false;
             }
 
+             <c:if test="${!empty goods && empty goods.imagepath}">
             if(($("#imageurl").val()==null || $("#imageurl").val()=="" )&& ($("#imagepath").val()==null || $("#imagepath").val()=="")){
                 alert("图片不能为空！");
                 return false;
             }
+            </c:if>
 
             if($("#title").val().length<2 || $("#title").val().length>80){
                 alert("标题长度在2~80之间！");
@@ -167,7 +171,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-8">
+        <div class="col-md-8" style="margin-bottom: 50px;">
             <ul class="nav nav-tabs" style="margin-bottom: 20px;">
                 <c:choose>
                     <c:when test="${!empty goods}">
@@ -178,7 +182,7 @@
                     </c:otherwise>
                 </c:choose>
             </ul>
-        <form id="addform">
+        <form id="addform" >
             <div class="form-group form-inline">
                 <label >标题:</label>
                 <input type="text" name="title" id="title" class="form-control" value="${goods.title}"/>

@@ -33,10 +33,10 @@
         .goods{
             width:100%;
             max-width: 260px;
-            min-width: 180px;
-            height: 350px;
+            min-width: 220px;
+            height: 320px;
             background-color: white;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             box-shadow: 2px 2px 4px #888888;
         }
         .goods-bottom{
@@ -46,7 +46,7 @@
         }
         .image{
             width: 100%;
-            height: 280px;
+            height: 250px;
         }
 
         .img{
@@ -187,14 +187,12 @@ function list(){
             </div>
         </div>
     </c:if>
-    <div class="container-fluid" style="margin-top:20px;margin-bottom: 100px;">
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-2" id="content1" ></div>
-            <div class="col-md-2" id="content2"></div>
-            <div class="col-md-2" id="content3" ></div>
-            <div class="col-md-2" id="content4" ></div>
-            <div class="col-md-2"></div>
+    <div class="container-fluid" style="margin-top:20px;margin-bottom: 70px;">
+        <div class="row" style="width:1000px;margin: 0 auto">
+            <div class="col-md-3" id="content1" ></div>
+            <div class="col-md-3" id="content2"></div>
+            <div class="col-md-3" id="content3" ></div>
+            <div class="col-md-3" id="content4" ></div>
         </div>
     </div>
 </div>

@@ -76,12 +76,12 @@
 <div class="container-fluid" >
     <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-8">
+        <div class="col-md-8" style="margin-bottom: 70px;">
             <div style="clear: left;">
                 <ul class="nav nav-tabs" style="height: 40px;">
                     <li role="presentation" class="active"><h4>购物车</h4></li>
                 </ul>
-                <div class="panel panel-default" style="margin-top:10px;margin-bottom: 100px;">
+                <div class="panel panel-default" style="margin-top:10px;">
                     <table class="table table-hover " id="localimage">
                         <thead>
                         <tr style="background-color: lightgray">

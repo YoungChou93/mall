@@ -115,7 +115,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-8">
+        <div class="col-md-8" style="margin-bottom: 70px;">
             <div class="top">
             <div class="image">
                 <c:choose>

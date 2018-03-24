@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-03-18 21:10:15
+Date: 2018-03-24 14:00:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -69,9 +69,9 @@ CREATE TABLE `goods` (
 -- Records of goods
 -- ----------------------------
 INSERT INTO `goods` VALUES ('2', '商品1', null, 'http://yanxuan.nosdn.127.net/8adfcfc388ca864049685ae4a569f523.jpg?imageView&thumbnail=430x430&quality=95', '摘要', '正文', '22.00', '2');
-INSERT INTO `goods` VALUES ('5', 'shang', 'seller/picture/20180219150017.jpg', '', 'sdfsf', 'sdfsf', '222.00', '2');
-INSERT INTO `goods` VALUES ('6', '商品', 'seller/picture/20180219151457.jpg', '', '摘要', 'hahahahahhaha', '111.00', '2');
-INSERT INTO `goods` VALUES ('15', '男式牛仔外套', null, 'http://yanxuan.nosdn.127.net/ce5d4fe3db1d413f83baacd699ea7f8e.png?imageView&quality=95&thumbnail=245x245', '测试', '测试', '199.00', '2');
+INSERT INTO `goods` VALUES ('5', 'shang', 'seller/picture/20180219150017.jpg', '', 'sdfsf', 'sdfsf', '221.00', '2');
+INSERT INTO `goods` VALUES ('6', '商品', 'seller/picture/20180219151457.jpg', '', '摘要', 'hahahahahhaha', '121.00', '2');
+INSERT INTO `goods` VALUES ('15', '男式牛仔外套', null, 'http://yanxuan.nosdn.127.net/ce5d4fe3db1d413f83baacd699ea7f8e.png?imageView&quality=95&thumbnail=245x245', '测试', '测试', '189.00', '2');
 INSERT INTO `goods` VALUES ('22', '柔风黄油曲奇 480克', null, 'http://yanxuan.nosdn.127.net/3ff6c1d3eaf637801f3d7fef3183d746.png?imageView&thumbnail=430x430&quality=95', '进口优质原料，不人工添加食品添加剂', '品名柔风黄油曲奇净含量480克保质期60天配料黄油风味：小麦粉、黄油、白砂糖、乳粉、鸡蛋、食用盐\r\n抹茶风味：小麦粉、黄油、白砂糖、乳粉、鸡蛋、抹茶粉、食用盐\r\n咖啡风味：小麦粉、黄油、白砂糖、乳粉、鸡蛋、咖啡粉、食用盐', '98.99', '2');
 INSERT INTO `goods` VALUES ('23', '绿豆糕', null, 'http://yanxuan.nosdn.127.net/66b9f1638c0517d179262f14ed1345f9.png?imageView&thumbnail=430x430&quality=95', '细腻松软，入口绵柔', '品名绿豆糕净含量160克（8枚入）配料表原味：绿豆沙馅（脱皮绿豆、白砂糖、饮用水、精炼植物油、海藻糖、食用盐）\r\n玫瑰味：绿豆沙馅（脱皮绿豆、白砂糖、饮用水、精炼植物油、海藻糖、食用盐）、重瓣红玫瑰保质期60天贮存条件阴凉干燥处保存产地四川省乐山市温馨提示1、网易严选出售的食品，除明确质量问题外均不接受退换货\r\n2、本产品不添加防腐剂，开封后请尽快食用', '18.90', '2');
 INSERT INTO `goods` VALUES ('24', '草莓白巧克力 65克', null, 'http://yanxuan.nosdn.127.net/b5228b1128f8aeb1a0d7163696302b90.png?imageView&thumbnail=430x430&quality=95', '奶香果味，清新风味', '品名草莓白巧克力净含量65克产地山东省青岛市保质期270天配料白巧克力（白砂糖、可可脂、全脂乳粉、磷脂、聚甘油蓖麻醇酸酯、食用香精香料），冻干草莓贮存条件请避免阳光直射，并请在28℃以下的阴凉处保存温馨提示1.本品除明确质量问题外不支持30天无忧退货', '16.16', '2');
